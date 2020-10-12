@@ -1,0 +1,35 @@
+trigger TriggerOnAccount on Account (
+  before insert, after insert, 
+  before update, after update, 
+  before delete, after delete) {
+
+  if (Trigger.isBefore) {
+    if (Trigger.isInsert) {
+    
+    } 
+    if (Trigger.isUpdate) {
+      
+    }
+    if (Trigger.isDelete) {
+    
+    }
+  }
+
+  if (Trigger.isAfter) {
+    if (Trigger.isInsert) {     
+        Set<Id> triggerNewAccountIDs = new Set<id>();
+        for(Account a : Trigger.new){
+            triggerNewAccountIDs.add(a.Id);
+        }        
+        Account[] listAccount = [SELECT Phone FROM Account WHERE Id IN :triggerNewAccountIDs];        
+        AccPhNoFormatter.accFormatPhoneNumber(listAccount);
+    } 
+    if (Trigger.isUpdate) {
+    
+    }
+    if (Trigger.isDelete) {
+    
+    }
+  }
+
+}
